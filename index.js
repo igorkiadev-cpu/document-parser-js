@@ -1,33 +1,40 @@
+
 // Document Parser - JavaScript
-// Simulates extracting structured data from a document and exporting to CSV
+// Simple simulation of document data extraction and CSV generation
 
-function parseDocument(text) {
-  const data = {
-    date: "2025-01-10",
-    product: "Sample Product",
-    quantity: 10,
-    reference: "REF-001"
-  };
-
-  return data;
-}
-
-function convertToCSV(data) {
-  const headers = Object.keys(data).join(",");
-  const values = Object.values(data).join(",");
-  return `${headers}\n${values}`;
-}
-
-// Simulated input document
 const documentText = `
-Delivery Date: 2025-01-10
+Delivery Note
+Date: 2025-01-10
 Product: Sample Product
 Quantity: 10
 Reference: REF-001
 `;
 
+// Simple parser function
+function parseDocument(text) {
+  const date = text.match(/Date:\s(.+)/)?.[1];
+  const product = text.match(/Product:\s(.+)/)?.[1];
+  const quantity = text.match(/Quantity:\s(.+)/)?.[1];
+  const reference = text.match(/Reference:\s(.+)/)?.[1];
+
+  return {
+    date,
+    product,
+    quantity,
+    reference
+  };
+}
+
+// Convert parsed data to CSV format
+function convertToCSV(data) {
+  const header = "date,product,quantity,reference";
+  const row = `${data.date},${data.product},${data.quantity},${data.reference}`;
+  return `${header}\n${row}`;
+}
+
+// Run parser
 const parsedData = parseDocument(documentText);
 const csvOutput = convertToCSV(parsedData);
 
-console.log("Generated CSV:");
+// Output result
 console.log(csvOutput);
