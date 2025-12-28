@@ -1,0 +1,5 @@
+Delivery Note
+Date: 2025-01-10
+Product: Sample Product
+Quantity: 10
+Reference: REF-001
